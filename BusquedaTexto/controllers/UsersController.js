@@ -11,9 +11,7 @@ UsersController.create = async (req, res, next) => {
 
     return res.json(user)
   } catch (err) {
-    console.error(err)
-
-    return res.status(500).json({ message: 'Internal Server Error' })
+    next(err)
   }
 }
 
@@ -32,7 +30,16 @@ UsersController.update = async (req, res, next) => {
 
     return res.json(user)
   } catch (err) {
-    console.error(err)
+    next(err)
+  }
+}
+
+UsersController.firstPurchase = async (req, res, next) => {
+  const data = req.body
+
+  try {
+    const dataFormateada = validate(data)
+  } catch (err) {
     next(err)
   }
 }

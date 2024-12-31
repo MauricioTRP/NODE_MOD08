@@ -21,6 +21,8 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+      const { Purchase } = models
+      this.hasMany(Purchase)
     }
   }
   User.init({
@@ -34,7 +36,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isEmail: true
-      }
+      },
+      unique: true
     },
     password: {
       type: DataTypes.STRING,

@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+      const { Purchase } = models
+      this.hasMany(Purchase)
     }
   }
   Book.init({
@@ -24,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     stock: {
       type: DataTypes.INTEGER,
       validate: {
-        min: 0
+        min: { args: 0, msg: 'Stock debe ser mayor que cero'}
       },
       defaultValue: 0
     },
