@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     stock: {
       type: DataTypes.INTEGER,
       validate: {
-        min: { args: 0, msg: 'Stock debe ser mayor que cero'}
+        min: { args: [0], msg: 'Stock debe ser mayor que cero'}
       },
       defaultValue: 0
     },
@@ -35,7 +35,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Book',
-    tableName: 'books' // nombre de tabla 'books'
+    tableName: 'books', // nombre de tabla 'books'
+    paranoid: true
   });
   return Book;
 };

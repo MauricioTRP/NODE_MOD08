@@ -1,5 +1,5 @@
 const express = require('express')
-const { BooksRouter, UsersRouter } = require('./router')
+const { BooksRouter, UsersRouter, PurchasesRouter } = require('./router')
 const { errorHandler } = require('./middlewares')
 
 const app = express()
@@ -9,6 +9,7 @@ app.use(express.json())
 
 app.use("/books", BooksRouter)
 app.use("/users", UsersRouter)
+app.use("/purchases", PurchasesRouter)
 
 /**
  * Error Handler

@@ -23,6 +23,25 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
 
+    static async returnOrder(id) {
+      const transaction = await sequelize.transaction()
+
+      try {
+        const purchase = await this.findByPk(id, { transaction })
+
+        const book = await purchase.getBook({ transaction })
+        book.stock += 1
+
+        await book.save({ transaction })
+        await purchase.destroy({ transaction })
+
+        await transaction.commit()
+      } catch (err) {
+        await transaction.rollback()
+        throw err
+      }
+    }
+
     static associate(models) {
       // define association here
       const { User, Book } = models
@@ -48,12 +67,13 @@ module.exports = (sequelize, DataTypes) => {
     amount: {
       type: DataTypes.REAL,
       validate: {
-        min: { args: 0, msg: 'Amount debe ser mayor que cero' }
+        min: { args: [0], msg: 'Amount debe ser mayor que cero' }
       }
     }
   }, {
     sequelize,
     modelName: 'Purchase',
+    paranoid: true
   });
   return Purchase;
 };

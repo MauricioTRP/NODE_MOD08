@@ -61,7 +61,8 @@ module.exports = (sequelize, DataTypes) => {
       //     user.password = await argon2.hash(user.password)
       //   }
       // }
-    }
+    },
+    paranoid: true
   });
 
   return User;
