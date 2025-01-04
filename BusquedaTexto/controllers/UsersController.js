@@ -34,15 +34,5 @@ UsersController.update = async (req, res, next) => {
   }
 }
 
-UsersController.firstPurchase = async (req, res, next) => {
-  const data = req.body
-
-  try {
-    const dataFormateada = validate(data)
-  } catch (err) {
-    next(err)
-  }
-}
-
 
 module.exports = { UsersController }
