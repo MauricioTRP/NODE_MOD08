@@ -1,7 +1,8 @@
-const { CreateSignature } = require('./jwt')
+const { CreateSignature, ValidateSignature } = require('./jwt')
 const { ValidatePassword } = require('./password')
 
 module.exports = {
   CreateSignature,
-  ValidatePassword
+  ValidatePassword,
+  ValidateSignature
 }
