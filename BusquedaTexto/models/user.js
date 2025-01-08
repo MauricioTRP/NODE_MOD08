@@ -21,8 +21,9 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      const { Purchase } = models
+      const { Purchase, Book } = models
       this.hasMany(Purchase)
+      this.belongsToMany(Book, { through: Purchase })
     }
   }
   User.init({

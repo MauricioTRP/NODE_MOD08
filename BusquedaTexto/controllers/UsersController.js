@@ -1,5 +1,5 @@
 const db = require('../models');
-const { User } = db
+const { User, Book } = db
 
 const UsersController = {}
 
@@ -67,6 +67,19 @@ UsersController.getAllUser = async (req, res, next) => {
   try {
     const user = await User.findAll()
     return res.json(user)
+  } catch (err) {
+    next(err)
+  }
+}
+
+// endpoint protegido
+// { _id: idUsuarioLogeado }
+UsersController.findPurchases = async (req, res, next) => {
+  const { user } = req
+  try {
+    const userResult = await User.findByPk(user._id, { include: Book })
+
+    return res.json(userResult)
   } catch (err) {
     next(err)
   }

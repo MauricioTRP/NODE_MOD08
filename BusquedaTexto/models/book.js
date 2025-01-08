@@ -13,8 +13,9 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      const { Purchase } = models
+      const { Purchase, User } = models
       this.hasMany(Purchase)
+      this.belongsToMany(User, { through: Purchase })
     }
   }
   Book.init({

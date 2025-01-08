@@ -7,12 +7,11 @@ const CreateSignature = (payload) => {
 
 const ValidateSignature = (req) => {
   const signature = req.cookies
-  console.log(req.cookies)
 
   if(signature.Bearer) {
     try {
       const payload = verify(signature.Bearer, envConfig.JWT_SECRET, { algorithms: 'HS256' })
-      req.user = payload
+      req.user = payload // estamos agregando el usuario a "req"
   
       return true
     } catch (error) {
